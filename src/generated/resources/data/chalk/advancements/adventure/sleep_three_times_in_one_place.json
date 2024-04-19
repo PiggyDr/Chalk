@@ -34,5 +34,6 @@
     [
       "sleep_three_times_in_one_place"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

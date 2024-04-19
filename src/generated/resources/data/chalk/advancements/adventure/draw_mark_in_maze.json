@@ -57,5 +57,6 @@
       "draw_in_fortress",
       "draw_in_stronghold"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

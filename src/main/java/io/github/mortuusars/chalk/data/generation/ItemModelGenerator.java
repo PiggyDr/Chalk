@@ -3,6 +3,7 @@ package io.github.mortuusars.chalk.data.generation;
 
 import io.github.mortuusars.chalk.Chalk;
 import io.github.mortuusars.chalk.items.ChalkBoxItem;
+import io.github.mortuusars.chalk.render.ChalkColors;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -23,7 +24,7 @@ public class ItemModelGenerator extends ItemModelProvider {
                 .parent(getExistingFile(mcLoc("item/generated")))
                 .texture("layer0", "item/chalk_box");
 
-        for (DyeColor color : DyeColor.values()) {
+        for (DyeColor color : ChalkColors.COLORS.keySet()) {
             int colorID = color.getId() + 1;
 
             ItemModelBuilder chalkBoxWithChalkModel = getBuilder("chalk_box_" + color)

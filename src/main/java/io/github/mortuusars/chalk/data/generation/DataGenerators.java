@@ -23,9 +23,9 @@ public class DataGenerators {
 
         // Server
         dataGenerator.addProvider(gatherDataEvent.includeServer(), new Recipes(dataGenerator));
-        ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(dataGenerator, lookupProvider, existingFileHelper);
-        dataGenerator.addProvider(gatherDataEvent.includeServer(), new ModItemTagsProvider(dataGenerator, lookupProvider, blockTagsProvider, existingFileHelper));
-        dataGenerator.addProvider(gatherDataEvent.includeServer(), blockTagsProvider);
+//        ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(dataGenerator, lookupProvider, existingFileHelper);
+//        dataGenerator.addProvider(gatherDataEvent.includeServer(), new ModItemTagsProvider(dataGenerator, lookupProvider, blockTagsProvider, existingFileHelper));
+//        dataGenerator.addProvider(gatherDataEvent.includeServer(), blockTagsProvider);
         dataGenerator.addProvider(gatherDataEvent.includeServer(), new Advancements(dataGenerator, lookupProvider, existingFileHelper));
 
         // Client

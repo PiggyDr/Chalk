@@ -9,6 +9,7 @@ import io.github.mortuusars.chalk.items.ChalkBoxItem;
 import io.github.mortuusars.chalk.items.ChalkItem;
 import io.github.mortuusars.chalk.loot.LootTableAdditionModifier;
 import io.github.mortuusars.chalk.menus.ChalkBoxMenu;
+import io.github.mortuusars.chalk.render.ChalkColors;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
@@ -67,7 +68,7 @@ public class Chalk
         public static final HashMap<DyeColor, RegistryObject<ChalkMarkBlock>> MARKS = new HashMap<>();
 
         static {
-            for (DyeColor color : DyeColor.values()) {
+            for (DyeColor color : ChalkColors.COLORS.keySet()) {
                 MARKS.put(color, BLOCKS.register(color + "_chalk_mark",
                         () -> new ChalkMarkBlock(color, BlockBehaviour.Properties.of()
                                 .mapColor(color)
@@ -95,7 +96,7 @@ public class Chalk
                         .stacksTo(1)));
 
         static {
-            for (DyeColor color : DyeColor.values()) {
+            for (DyeColor color : ChalkColors.COLORS.keySet()) {
                 CHALKS.put(color, ITEMS.register(color + "_chalk", () -> new ChalkItem(color, new Item.Properties())));
             }
         }

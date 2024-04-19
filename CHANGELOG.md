@@ -1,3 +1,6 @@
+### Unreleased
+- Chalks of unsupported colors will no longer be created when other mod adds their colors to vanilla DyeColor list. Dye Depot, for example.
+
 ### 1.6.3
 - Fixed glow uses being consumed twice per one mark drawn.
 - Fixed glow disappearing when playing on dedicated server. 

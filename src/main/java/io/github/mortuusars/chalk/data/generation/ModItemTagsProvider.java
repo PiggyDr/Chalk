@@ -1,6 +1,7 @@
 package io.github.mortuusars.chalk.data.generation;
 
 import io.github.mortuusars.chalk.Chalk;
+import io.github.mortuusars.chalk.render.ChalkColors;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -29,7 +30,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             tag(Chalk.Tags.Items.FORGE_CHALKS).add(item.get());
         });
 
-        for (DyeColor color : DyeColor.values()){
+        for (DyeColor color : ChalkColors.COLORS.keySet()){
             tag(color.getTag()).add(Chalk.Items.getChalk(color));
         }
     }
