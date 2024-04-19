@@ -1,4 +1,5 @@
 ### Unreleased
+- Chalk marks now have proper names with mods like WAILA or WTHIT.
 - Chalks of unsupported colors will no longer be created when other mod adds their colors to vanilla DyeColor list. Dye Depot, for example.
 
 ### 1.6.3

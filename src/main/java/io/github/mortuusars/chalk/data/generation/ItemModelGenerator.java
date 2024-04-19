@@ -18,24 +18,14 @@ public class ItemModelGenerator extends ItemModelProvider {
     @Override
     protected void registerModels() {
         Chalk.Items.CHALKS.forEach((color, item) ->
-            singleTexture(item.getId().getPath(), modLoc("item/chalk"), "layer0", modLoc("item/" + item.getId().getPath())));
-
-        ItemModelBuilder chalkBoxModelBuilder = getBuilder("chalk_box")
-                .parent(getExistingFile(mcLoc("item/generated")))
-                .texture("layer0", "item/chalk_box");
+                singleTexture(item.getId().getPath(), modLoc("item/chalk"), "layer0",
+                        modLoc("item/" + item.getId().getPath())));
 
         for (DyeColor color : ChalkColors.COLORS.keySet()) {
-            int colorID = color.getId() + 1;
-
-            ItemModelBuilder chalkBoxWithChalkModel = getBuilder("chalk_box_" + color)
+            getBuilder("chalk_box_" + color)
                     .parent(getExistingFile(mcLoc("item/generated")))
                     .texture("layer0", "item/chalk_box")
                     .texture("layer1", "item/" + "chalk_box_" + color + "_chalk");
-
-            chalkBoxModelBuilder.override()
-                    .predicate(ChalkBoxItem.SELECTED_PROPERTY, colorID)
-                    .model(chalkBoxWithChalkModel)
-                    .end();
         }
     }
 }
