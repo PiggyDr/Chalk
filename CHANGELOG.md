@@ -1,5 +1,6 @@
-### Unreleased
+### 1.6.4
 - Chalk marks now have proper names with mods like WAILA or WTHIT.
+- Chalks will again generate in Abandoned Mineshafts. They've been missing for a year, and no one noticed.
 - Chalks of unsupported colors will no longer be created when other mod adds their colors to vanilla DyeColor list. Dye Depot, for example.
 
 ### 1.6.3

@@ -3,7 +3,8 @@
   "entries": [
     "chalk:bonus_chest_chalks",
     "chalk:desert_pyramid_chest_chalks",
-    "chalk:dungeon_chest_chalks",
+    "chalk:simple_dungeon_chest_chalks",
+    "chalk:abandoned_mineshaft_chest_chalks",
     "chalk:village_chest_chalks"
   ]
 }

@@ -6,5 +6,5 @@
       "loot_table_id": "minecraft:chests/simple_dungeon"
     }
   ],
-  "lootTable": "chalk:chests/dungeon_chalk_loot"
+  "lootTable": "chalk:chests/simple_dungeon_chalk_loot"
 }
