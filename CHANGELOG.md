@@ -1,31 +1,31 @@
-### Unreleased
+## 1.6.5 - 2024-07-28
 - Update to 1.21. 
 - Chalk Box contents are now showing in the tooltip.
 - Improved emissive rendering of glowing marks. 
 
-### 1.6.4
+## 1.6.4
 - Chalk marks now have proper names with mods like WAILA or WTHIT.
 - Chalks will again generate in Abandoned Mineshafts. They've been missing for a year, and no one noticed.
 - Chalks of unsupported colors will no longer be created when other mod adds their colors to vanilla DyeColor list. Dye Depot, for example.
 
-### 1.6.3
+## 1.6.3
 - Fixed glow uses being consumed twice per one mark drawn.
 - Fixed glow disappearing when playing on dedicated server. 
 
-### 1.6.2
+## 1.6.2
 - Symbol Selection screen is now using a key bind for inventory instead of hardcoded E key.
 - Fixed Japanese localization error that prevented it to work correctly.
 
-### 1.6.1
+## 1.6.1
 - Fixed crash when opening a loot chest. 
 
-### 1.6.0
+## 1.6.0
 - Internal changes to allow adding more colors.
 
-### 1.5.1
+## 1.5.1
 - Fixed crash when drawing a symbol from offhand. 
 
-### 1.5.0
+## 1.5.0
 - Added new symbols: House, Checkmark, Heart, Skull, Pickaxe
   - Symbol selection UI is opened by using Chalk/Chalk Box while sneaking. 
   - Some symbols are unlocked by completing an advancement, others are unlocked by default. (_configurable_)
@@ -50,9 +50,9 @@
 - Added several advancements.
 - Added config for mark rotation offset.
 
-### WARNING - All arrow marks, drawn in previous versions of the mod, will be changed to a dot due to some changes to Chalk Mark blockstate. 
+## WARNING - All arrow marks, drawn in previous versions of the mod, will be changed to a dot due to some changes to Chalk Mark blockstate. 
 
-### 1.4.0 - 2023-02-10
+## 1.4.0 - 2023-02-10
 
 - Added Chalk Box quick change selected chalks: 
   - Works by Shift+Clicking while not looking at a block.
@@ -61,13 +61,13 @@
   - Fixes Forbidden&Arcanus Eternal modifier not preventing damage to the chalk.
 - Mod sounds now use unique SoundEvents: fixes subtitles and allows changing sounds in a resource pack.
 
-### 1.3.2 - 2022-08-22
+## 1.3.2 - 2022-08-22
 
 - Reduced chalk spawn chance in chests.
 - Fixed stone spawning instead of chalk in loot tables.
 
-### 1.3.1 - 2022-08-11
+## 1.3.1 - 2022-08-11
 
 - Fixed sometimes not being able to draw a mark. (Minecraft has multiple types of air. Who would have thought.)
 
-### 1.3.0 - 2022-07-31 - 1 in a MILLION
+## 1.3.0 - 2022-07-31 - 1 in a MILLION
