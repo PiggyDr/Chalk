@@ -22,7 +22,10 @@ import java.util.function.BiConsumer;
 
 public class LootTables {
     public static class ChestLootTables implements LootTableSubProvider {
+        private final HolderLookup.Provider provider;
+
         public ChestLootTables(HolderLookup.Provider provider) {
+            this.provider = provider;
         }
 
         @Override

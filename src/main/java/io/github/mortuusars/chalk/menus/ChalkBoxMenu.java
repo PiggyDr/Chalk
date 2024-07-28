@@ -165,6 +165,10 @@ public class ChalkBoxMenu extends AbstractContainerMenu {
         return player.getInventory().getItem(chalkBoxSlotIndex);
     }
 
+    public boolean isGlowingEnabled() {
+        return glowingEnabled;
+    }
+
     public int getGlowAmount() {
         return chalkBoxItem.getGlowAmount(getChalkBoxStack());
     }

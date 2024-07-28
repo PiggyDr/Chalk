@@ -15,7 +15,6 @@ import io.github.mortuusars.chalk.data.ChalkColors;
 import io.github.mortuusars.chalk.utils.MarkDrawingContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;

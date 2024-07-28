@@ -35,22 +35,4 @@ public class Mark
                 .setValue(ChalkMarkBlock.ORIENTATION, orientation)
                 .setValue(ChalkMarkBlock.GLOWING, glowing);
     }
-
-    public static Mark fromBuffer(FriendlyByteBuf buffer) {
-        return new Mark(
-                buffer.readEnum(Direction.class),
-                buffer.readInt(),
-                buffer.readEnum(MarkSymbol.class),
-                buffer.readEnum(SymbolOrientation.class),
-                buffer.readBoolean()
-        );
-    }
-
-    public void toBuffer(FriendlyByteBuf buffer) {
-        buffer.writeEnum(facing);
-        buffer.writeInt(color);
-        buffer.writeEnum(symbol);
-        buffer.writeEnum(orientation);
-        buffer.writeBoolean(glowing);
-    }
 }

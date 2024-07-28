@@ -48,16 +48,6 @@ public class MarkDrawnTrigger extends SimpleCriterionTrigger<MarkDrawnTrigger.Tr
             return Chalk.CriteriaTriggers.MARK_DRAWN.get().createCriterion(instance);
         }
 
-        public static Criterion<MarkDrawnTrigger.TriggerInstance> structureAndLight(Holder<Structure> structureKey, MinMaxBounds.Ints lightLevel) {
-            TriggerInstance instance = new TriggerInstance(EntityPredicate.wrap(
-                    Optional.empty()),
-                    Optional.of(LocationPredicate.Builder.inStructure(structureKey)
-                            .setLight(LightPredicate.Builder.light().setComposite(lightLevel)).build()),
-                    Optional.of(new MapColorPredicate(Collections.emptyList())),
-                    Optional.of(new DyeColorPredicate(Collections.emptyList())));
-            return Chalk.CriteriaTriggers.MARK_DRAWN.get().createCriterion(instance);
-        }
-
         public boolean matches(ServerPlayer player, MapColor surfaceColor, DyeColor markColor) {
             return (location.isEmpty() || location.get().matches(player.serverLevel(), player.getX(), player.getY(), player.getZ()))
                     && (this.surfaceColor.isEmpty() || this.surfaceColor.get().matches(surfaceColor))

@@ -44,7 +44,7 @@ public class ChalkBoxScreen extends AbstractContainerScreen<ChalkBoxMenu> {
         super.render(graphics, mouseX, mouseY, partialTick);
 
         if (getMenu().chalkBoxCoords != null) {
-            graphics.renderItem(getMenu().getChalkBoxStack(),getGuiLeft() + getMenu().chalkBoxCoords.getFirst(),getGuiTop() + getMenu().chalkBoxCoords.getSecond());
+            graphics.renderItem(getMenu().getChalkBoxStack(), getGuiLeft() + getMenu().chalkBoxCoords.getFirst(), getGuiTop() + getMenu().chalkBoxCoords.getSecond());
         }
 
         PoseStack poseStack = graphics.pose();
@@ -60,9 +60,9 @@ public class ChalkBoxScreen extends AbstractContainerScreen<ChalkBoxMenu> {
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-        graphics.blit(TEXTURE, getGuiLeft(), getGuiTop(), 0,0, imageWidth, imageHeight);
+        graphics.blit(TEXTURE, getGuiLeft(), getGuiTop(), 0, 0, imageWidth, imageHeight);
 
-        if (Config.Common.CHALK_BOX_GLOWING_ENABLED.get()){
+        if (getMenu().isGlowingEnabled()) {
             // Chalk Slots
             graphics.blit(TEXTURE, getGuiLeft() + 52, getGuiTop() + 17, 0, 180, 72, 36);
 
@@ -82,12 +82,11 @@ public class ChalkBoxScreen extends AbstractContainerScreen<ChalkBoxMenu> {
             }
 
             // Fill
-            int barSize = (int)Math.ceil((Math.min(getMenu().getGlowAmount(), maxGlowingUses) / (float) maxGlowingUses) * GLOWING_BAR_WIDTH);
+            int barSize = (int) Math.ceil((Math.min(getMenu().getGlowAmount(), maxGlowingUses) / (float) maxGlowingUses) * GLOWING_BAR_WIDTH);
             int glowingBarFillLevel = Math.min(GLOWING_BAR_WIDTH, barSize);
             graphics.blit(TEXTURE, getGuiLeft() + 52, getGuiTop() + 57, 72, 217, glowingBarFillLevel, 5);
 
-        }
-        else {
+        } else {
             // Chalk slots
             graphics.blit(TEXTURE, getGuiLeft() + 52, getGuiTop() + 32, 0, 180, 72, 36);
         }

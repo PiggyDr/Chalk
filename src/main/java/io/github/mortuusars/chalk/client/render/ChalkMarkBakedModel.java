@@ -41,7 +41,6 @@ public class ChalkMarkBakedModel implements BakedModel {
     public static final ModelProperty<MarkSymbol> SYMBOL = new ModelProperty<>();
     public static final ModelProperty<Boolean> GLOWING = new ModelProperty<>();
 
-    private static final ResourceLocation MODEL_NAME = Chalk.resource("block/chalk_mark");
     private static final ModelState MODEL_STATE = new SimpleModelState(Transformation.identity(), false);
     private static final Vector3f ROTATION_ORIGIN = new Vector3f(0.5f, 0.5f, 0.5f);
     private static final FaceBakery faceBakery = new FaceBakery();

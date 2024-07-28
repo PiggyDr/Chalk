@@ -20,7 +20,6 @@ public class ClientChalkBoxTooltip implements ClientTooltipComponent {
 
     private static final int ROWS = 4;
     private static final int COLUMNS = 2;
-    private static final int MARGIN_Y = 4;
 
     private final ChalkBoxContents contents;
 

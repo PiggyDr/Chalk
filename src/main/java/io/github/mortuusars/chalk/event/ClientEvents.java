@@ -27,6 +27,7 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
+@SuppressWarnings("unused")
 public class ClientEvents {
     @EventBusSubscriber(modid = Chalk.ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class Mod {
