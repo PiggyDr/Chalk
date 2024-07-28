@@ -18,8 +18,12 @@ build
 .gradle
 
 # other
+.cache
+*.cache\
 eclipse
+repo
 run
+runs
 mcmodsrepo
 extra-mods*
 

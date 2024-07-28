@@ -1,21 +1,22 @@
 package io.github.mortuusars.chalk.data.generation;
 
 import io.github.mortuusars.chalk.Chalk;
-import io.github.mortuusars.chalk.render.ChalkColors;
+import io.github.mortuusars.chalk.data.ChalkColors;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagsProvider extends ItemTagsProvider {
-    public ModItemTagsProvider(DataGenerator generator, CompletableFuture<HolderLookup.Provider> lookupProvider, BlockTagsProvider blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
+    public ModItemTagsProvider(DataGenerator generator, CompletableFuture<HolderLookup.Provider> lookupProvider,
+                               BlockTagsProvider blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(generator.getPackOutput(), lookupProvider, blockTagsProvider.contentsGetter(), Chalk.ID, existingFileHelper);
     }
 
@@ -27,7 +28,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         Chalk.Items.CHALKS.forEach((color, item) -> {
             tag(Chalk.Tags.Items.CHALKS).add(item.get());
-            tag(Chalk.Tags.Items.FORGE_CHALKS).add(item.get());
+            tag(Chalk.Tags.Items.C_CHALKS).add(item.get());
         });
 
         for (DyeColor color : ChalkColors.COLORS.keySet()){

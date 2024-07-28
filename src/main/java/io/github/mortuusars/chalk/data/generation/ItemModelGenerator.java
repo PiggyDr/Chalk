@@ -1,14 +1,11 @@
 package io.github.mortuusars.chalk.data.generation;
 
-
 import io.github.mortuusars.chalk.Chalk;
-import io.github.mortuusars.chalk.items.ChalkBoxItem;
-import io.github.mortuusars.chalk.render.ChalkColors;
+import io.github.mortuusars.chalk.data.ChalkColors;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.DyeColor;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ItemModelGenerator extends ItemModelProvider {
     public ItemModelGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {

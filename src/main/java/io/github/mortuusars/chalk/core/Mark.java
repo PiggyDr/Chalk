@@ -26,7 +26,7 @@ public class Mark
 
     public BlockState createBlockState(ItemStack drawingItem) {
         DyeColor color = DyeColor.WHITE;
-        if (drawingItem.getItem() instanceof IDrawingTool drawingTool) {
+        if (drawingItem.getItem() instanceof IChalkDrawingTool drawingTool) {
             color = drawingTool.getMarkColor(drawingItem).orElse(color);
         }
         return Chalk.Blocks.getMarkBlock(color).defaultBlockState()

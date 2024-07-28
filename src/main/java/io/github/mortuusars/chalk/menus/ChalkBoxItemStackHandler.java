@@ -1,40 +1,48 @@
 package io.github.mortuusars.chalk.menus;
 
-import io.github.mortuusars.chalk.items.ChalkBox;
+import com.google.common.base.Preconditions;
+import io.github.mortuusars.chalk.item.ChalkBoxItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class ChalkBoxItemStackHandler extends ItemStackHandler {
     private final ItemStack chalkBoxStack;
+    private final ChalkBoxItem chalkBoxItem;
 
     public ChalkBoxItemStackHandler(ItemStack chalkBoxStack) {
-        super(ChalkBox.SLOTS);
+        super(ChalkBoxItem.SLOTS);
+        Preconditions.checkArgument(chalkBoxStack.getItem() instanceof ChalkBoxItem, "{} is not a ChalkBoxItem", chalkBoxStack);
         this.chalkBoxStack = chalkBoxStack;
+        this.chalkBoxItem = ((ChalkBoxItem) chalkBoxStack.getItem());
 
-        List<ItemStack> contents = ChalkBox.getContents(chalkBoxStack);
+        List<ItemStack> items = chalkBoxItem.getContents(chalkBoxStack).items();
 
-        for (int index = 0; index < contents.size(); index++) {
-            this.stacks.set(index, contents.get(index));
+        for (int index = 0; index < items.size(); index++) {
+            this.stacks.set(index, items.get(index));
         }
+    }
+
+    public ItemStack getChalkBoxStack() {
+        return chalkBoxStack;
     }
 
     @Override
     public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-        return ChalkBox.isItemValid(slot, stack);
+        return chalkBoxItem.isItemValid(chalkBoxStack, slot, stack);
     }
 
     @Override
     protected void onContentsChanged(int slot) {
-        int prevGlowingUses = ChalkBox.getGlowLevel(chalkBoxStack);
+        int prevGlowingAmount = chalkBoxItem.getGlowAmount(chalkBoxStack);
 
-        ChalkBox.setSlot(chalkBoxStack, slot, getStackInSlot(slot));
+        chalkBoxItem.setItemInSlot(chalkBoxStack, slot, getStackInSlot(slot));
 
-        if (slot == ChalkBox.GLOWINGS_SLOT_INDEX && ChalkBox.getGlowLevel(chalkBoxStack) > prevGlowingUses) {
+        if (slot == ChalkBoxItem.GLOWINGS_SLOT_INDEX && chalkBoxItem.getGlowAmount(chalkBoxStack) > prevGlowingAmount) {
             // Refresh glow stack:
-            this.stacks.set(slot, ChalkBox.getItemInSlot(chalkBoxStack, slot));
+            this.stacks.set(slot, chalkBoxItem.getItemInSlot(chalkBoxStack, slot));
         }
     }
 }

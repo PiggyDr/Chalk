@@ -1,0 +1,101 @@
+{
+  "parent": "chalk:adventure/this_way",
+  "criteria": {
+    "draw_in_village_desert": {
+      "conditions": {
+        "location": {
+          "structures": "minecraft:village_desert"
+        },
+        "mark_color": {
+          "colors": []
+        },
+        "surface_color": {
+          "colors": []
+        }
+      },
+      "trigger": "chalk:mark_drawn"
+    },
+    "draw_in_village_plains": {
+      "conditions": {
+        "location": {
+          "structures": "minecraft:village_plains"
+        },
+        "mark_color": {
+          "colors": []
+        },
+        "surface_color": {
+          "colors": []
+        }
+      },
+      "trigger": "chalk:mark_drawn"
+    },
+    "draw_in_village_savanna": {
+      "conditions": {
+        "location": {
+          "structures": "minecraft:village_savanna"
+        },
+        "mark_color": {
+          "colors": []
+        },
+        "surface_color": {
+          "colors": []
+        }
+      },
+      "trigger": "chalk:mark_drawn"
+    },
+    "draw_in_village_snowy": {
+      "conditions": {
+        "location": {
+          "structures": "minecraft:village_snowy"
+        },
+        "mark_color": {
+          "colors": []
+        },
+        "surface_color": {
+          "colors": []
+        }
+      },
+      "trigger": "chalk:mark_drawn"
+    },
+    "draw_in_village_taiga": {
+      "conditions": {
+        "location": {
+          "structures": "minecraft:village_taiga"
+        },
+        "mark_color": {
+          "colors": []
+        },
+        "surface_color": {
+          "colors": []
+        }
+      },
+      "trigger": "chalk:mark_drawn"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.chalk.vandalism.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "chalk:light_gray_chalk"
+    },
+    "title": {
+      "translate": "advancement.chalk.vandalism.title"
+    }
+  },
+  "requirements": [
+    [
+      "draw_in_village_plains",
+      "draw_in_village_desert",
+      "draw_in_village_savanna",
+      "draw_in_village_snowy",
+      "draw_in_village_taiga"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

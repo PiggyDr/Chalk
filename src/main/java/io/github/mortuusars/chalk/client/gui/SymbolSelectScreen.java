@@ -9,12 +9,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import io.github.mortuusars.chalk.Chalk;
 import io.github.mortuusars.chalk.config.Config;
-import io.github.mortuusars.chalk.core.IDrawingTool;
+import io.github.mortuusars.chalk.core.IChalkDrawingTool;
 import io.github.mortuusars.chalk.core.Mark;
 import io.github.mortuusars.chalk.core.MarkSymbol;
 import io.github.mortuusars.chalk.network.Packets;
-import io.github.mortuusars.chalk.network.packet.ServerboundDrawMarkPacket;
-import io.github.mortuusars.chalk.render.ChalkColors;
+import io.github.mortuusars.chalk.network.packet.DrawMarkC2SP;
+import io.github.mortuusars.chalk.data.ChalkColors;
 import io.github.mortuusars.chalk.utils.MarkDrawingContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -98,7 +98,7 @@ public class SymbolSelectScreen extends Screen {
 
         ItemStack itemInHand = minecraft.player.getItemInHand(drawingHand);
 
-        this.color = itemInHand.getItem() instanceof IDrawingTool drawingTool ? drawingTool.getMarkColorValue(itemInHand) : ChalkColors.fromDyeColor(DyeColor.WHITE);
+        this.color = itemInHand.getItem() instanceof IChalkDrawingTool drawingTool ? drawingTool.getMarkColorValue(itemInHand) : ChalkColors.fromDyeColor(DyeColor.WHITE);
         r = (float)(this.color >> 16 & 255) / 255.0F;
         g = (float)(this.color >> 8 & 255) / 255.0F;
         b = (float)(this.color & 255) / 255.0F;
@@ -118,21 +118,21 @@ public class SymbolSelectScreen extends Screen {
         centerX = width / 2;
         centerY = height / 2;
 
-        buttonsWidth = unlockedSymbols.size() > 0 ?
+        buttonsWidth = !unlockedSymbols.isEmpty() ?
                 SYMBOL_SIZE * unlockedSymbols.size() + SYMBOL_SPACING * (unlockedSymbols.size() - 1)
                 : SYMBOL_SIZE;
         buttonsStartX = centerX - buttonsWidth / 2;
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float pPartialTick) {
+    public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float pPartialTick) {
         // Keep sneaking while choosing a mark to not jerk player's camera:
         player.setPose(Pose.CROUCHING);
         if (player.getForcedPose() != Pose.CROUCHING)
             player.setForcedPose(Pose.CROUCHING);
 
         // BG
-        graphics.fillGradient(0, 0, width, height, 0x15000000, 0x35000000);
+        graphics.fillGradient(0, 0, width, height, 0x25000000, 0x45000000);
 
         super.render(graphics, mouseX, mouseY, pPartialTick);
 
@@ -159,6 +159,10 @@ public class SymbolSelectScreen extends Screen {
         graphics.pose().popPose();
     }
 
+    @Override
+    public void renderBackground(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+    }
+
     private void drawSymbolButton(GuiGraphics graphics, int mouseX, int mouseY, MarkSymbol symbol, int x, int y, boolean isHovering) {
         renderBlockSurface(graphics, mouseX, mouseY, x, y);
 
@@ -177,7 +181,7 @@ public class SymbolSelectScreen extends Screen {
         poseStack.pushPose();
 
         poseStack.translate(x + SYMBOL_SIZE / 2f, y + SYMBOL_SIZE / 2f, 0);
-        poseStack.mulPose(Axis.ZP.rotationDegrees(symbol.getDefaultOrientation().getRotation() + Config.SYMBOL_ROTATION_OFFSETS.get(symbol).get()));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(symbol.getDefaultOrientation().getRotation() + Config.Client.SYMBOL_ROTATION_OFFSETS.get(symbol).get()));
         poseStack.translate(-x - SYMBOL_SIZE / 2f , -y - SYMBOL_SIZE / 2f, 0);
         poseStack.translate(0, 0, 100);
         graphics.blit(SYMBOL_TEXTURES.get(symbol), x, y, SYMBOL_SIZE, SYMBOL_SIZE, 0, 0, 16, 16, 16, 16);
@@ -283,7 +287,7 @@ public class SymbolSelectScreen extends Screen {
         Mark mark = createMark(symbol, player.getItemInHand(drawingHand));
 
         if (drawingContext.canDraw() && (!drawingContext.hasExistingMark() || drawingContext.shouldMarkReplaceAnother(mark))) {
-            Packets.sendToServer(new ServerboundDrawMarkPacket(mark.color,
+            Packets.sendToServer(new DrawMarkC2SP(mark.color,
                     NbtUtils.writeBlockState(mark.createBlockState(player.getItemInHand(drawingHand))), drawingContext.getMarkBlockPos(), drawingHand));
             player.swing(drawingHand);
             return true;
@@ -293,7 +297,7 @@ public class SymbolSelectScreen extends Screen {
     }
 
     private Mark createMark(MarkSymbol symbol, ItemStack itemInHand) {
-        if (!(itemInHand.getItem() instanceof IDrawingTool drawingTool))
+        if (!(itemInHand.getItem() instanceof IChalkDrawingTool drawingTool))
             throw new IllegalStateException("Item in hand is not IDrawingTool. [%s]".formatted(itemInHand));
 
         return drawingTool.getMark(itemInHand, drawingContext, symbol);

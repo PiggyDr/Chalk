@@ -23,13 +23,13 @@ public record PlayerSleepInfo(List<BlockPos> sleepPositions) {
         JsonObject json = GsonHelper.parse(serialized);
         return CODEC.decode(JsonOps.INSTANCE, json)
                 .resultOrPartial(s ->
-                        Chalk.LOGGER.error("Failed to deserialize PlayerSleepInfo: " + s + "\nInput: <" + serialized + ">"))
+                        Chalk.LOGGER.error("Failed to deserialize PlayerSleepInfo: {}\nInput: <{}>", s, serialized))
                 .orElse(Pair.of(new PlayerSleepInfo(Collections.emptyList()), null)).getFirst();
     }
 
     public String serialize() {
         Optional<JsonElement> encodedElement = CODEC.encodeStart(JsonOps.INSTANCE, this)
-                .resultOrPartial(s -> Chalk.LOGGER.error("Failed to serialize PlayerSleepInfo: " + s + "\nInput: <" + this.toString() + ">"));
+                .resultOrPartial(s -> Chalk.LOGGER.error("Failed to serialize PlayerSleepInfo: {}\nInput: <{}>", s, this.toString()));
         if (encodedElement.isEmpty())
             return "";
 

@@ -1,0 +1,199 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "chalk:chalk_box_contents": {
+                  "items": [
+                    {
+                      "components": {
+                        "minecraft:damage": 23
+                      },
+                      "count": 1,
+                      "id": "chalk:white_chalk"
+                    },
+                    {},
+                    {},
+                    {},
+                    {
+                      "components": {
+                        "minecraft:damage": 12
+                      },
+                      "count": 1,
+                      "id": "chalk:light_gray_chalk"
+                    },
+                    {},
+                    {},
+                    {
+                      "count": 1,
+                      "id": "chalk:red_chalk"
+                    },
+                    {}
+                  ]
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "chalk:chalk_box",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "chalk:chalk_box_contents": {
+                  "glowing_uses": 2,
+                  "items": [
+                    {},
+                    {
+                      "count": 1,
+                      "id": "chalk:light_gray_chalk"
+                    },
+                    {},
+                    {
+                      "components": {
+                        "minecraft:damage": 7
+                      },
+                      "count": 1,
+                      "id": "chalk:white_chalk"
+                    },
+                    {},
+                    {},
+                    {
+                      "components": {
+                        "minecraft:damage": 15
+                      },
+                      "count": 1,
+                      "id": "chalk:light_blue_chalk"
+                    },
+                    {},
+                    {
+                      "count": 7,
+                      "id": "minecraft:glowstone_dust"
+                    }
+                  ]
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "chalk:chalk_box",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "chalk:chalk_box_contents": {
+                  "glowing_uses": 5,
+                  "items": [
+                    {
+                      "components": {
+                        "minecraft:damage": 5
+                      },
+                      "count": 1,
+                      "id": "chalk:blue_chalk"
+                    },
+                    {},
+                    {
+                      "components": {
+                        "minecraft:damage": 50
+                      },
+                      "count": 1,
+                      "id": "chalk:pink_chalk"
+                    },
+                    {},
+                    {},
+                    {},
+                    {
+                      "count": 1,
+                      "id": "chalk:yellow_chalk"
+                    },
+                    {},
+                    {
+                      "count": 1,
+                      "id": "minecraft:glow_ink_sac"
+                    }
+                  ]
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "chalk:chalk_box",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "chalk:chalk_box_contents": {
+                  "items": [
+                    {},
+                    {
+                      "components": {
+                        "minecraft:damage": 6
+                      },
+                      "count": 1,
+                      "id": "chalk:magenta_chalk"
+                    },
+                    {},
+                    {
+                      "count": 1,
+                      "id": "chalk:cyan_chalk"
+                    },
+                    {},
+                    {},
+                    {
+                      "components": {
+                        "minecraft:damage": 4
+                      },
+                      "count": 1,
+                      "id": "chalk:lime_chalk"
+                    },
+                    {},
+                    {}
+                  ]
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "chalk:chalk_box",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "chalk:white_chalk",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "chalk:light_gray_chalk",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "chalk:black_chalk",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 60
+        }
+      ],
+      "rolls": 2.0
+    }
+  ],
+  "random_sequence": "chalk:chests/simple_dungeon_chalks"
+}

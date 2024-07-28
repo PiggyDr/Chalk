@@ -1,30 +1,31 @@
 package io.github.mortuusars.chalk.data.generation;
 
 import io.github.mortuusars.chalk.Chalk;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 public class Recipes extends RecipeProvider {
-    public Recipes(DataGenerator generator) {
-        super(generator.getPackOutput());
+    public Recipes(DataGenerator generator, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(generator.getPackOutput(), lookupProvider);
     }
 
     @Override
-    protected void buildRecipes(@NotNull Consumer<FinishedRecipe> recipeConsumer) {
-        Chalk.Items.CHALKS.forEach((color, item) -> ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, item.get(), 1)
-                .unlockedBy("has_calcite", has(Items.CALCITE))
-                .group("chalk:chalk")
-                .requires(Items.CALCITE)
-                .requires(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(new ResourceLocation(color + "_dye"))).asItem())
-                .save(recipeConsumer, Chalk.ID + ":chalk_from_" + color + "_dye"));
+    protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
+        Chalk.Items.CHALKS.forEach((color, item) ->
+                ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, item.get(), 1)
+                        .unlockedBy("has_calcite", has(Items.CALCITE))
+                        .group("chalk:chalk")
+                        .requires(Items.CALCITE)
+                        .requires(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("minecraft", color + "_dye")))
+                        .save(recipeOutput, Chalk.ID + ":chalk_from_" + color + "_dye"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, Chalk.Items.CHALK_BOX.get())
                 .unlockedBy("has_chalk", has(Chalk.Tags.Items.CHALKS))
@@ -35,6 +36,6 @@ public class Recipes extends RecipeProvider {
                 .pattern("PPP")
                 .define('P', Items.PAPER)
                 .define('S', Tags.Items.SLIMEBALLS)
-                .save(recipeConsumer);
+                .save(recipeOutput);
     }
 }

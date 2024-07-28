@@ -1,0 +1,49 @@
+{
+  "parent": "chalk:adventure/this_way",
+  "criteria": {
+    "draw_black": {
+      "conditions": {
+        "location": {
+          "light": {
+            "light": {
+              "max": 7
+            }
+          }
+        },
+        "mark_color": {
+          "colors": [
+            "black"
+          ]
+        },
+        "surface_color": {
+          "colors": [
+            29
+          ]
+        }
+      },
+      "trigger": "chalk:mark_drawn"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.chalk.alone_in_the_darkness.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "chalk:black_chalk"
+    },
+    "title": {
+      "translate": "advancement.chalk.alone_in_the_darkness.title"
+    }
+  },
+  "requirements": [
+    [
+      "draw_black"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

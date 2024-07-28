@@ -1,10 +1,10 @@
 {
-  "type": "chalk:loot_table_addition",
+  "type": "chalk:add_table",
   "conditions": [
     {
-      "condition": "forge:loot_table_id",
+      "condition": "neoforge:loot_table_id",
       "loot_table_id": "minecraft:chests/desert_pyramid"
     }
   ],
-  "lootTable": "chalk:chests/desert_pyramid_chalk_loot"
+  "table": "chalk:chests/desert_pyramid_chalks"
 }

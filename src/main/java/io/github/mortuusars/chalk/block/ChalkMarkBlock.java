@@ -5,7 +5,7 @@ import io.github.mortuusars.chalk.Chalk;
 import io.github.mortuusars.chalk.config.Config;
 import io.github.mortuusars.chalk.core.MarkSymbol;
 import io.github.mortuusars.chalk.core.SymbolOrientation;
-import io.github.mortuusars.chalk.render.ChalkColors;
+import io.github.mortuusars.chalk.data.ChalkColors;
 import io.github.mortuusars.chalk.utils.ParticleUtils;
 import io.github.mortuusars.chalk.utils.PositionUtils;
 import net.minecraft.core.BlockPos;
@@ -16,7 +16,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -36,14 +36,10 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Vector3f;
 
 import java.util.Map;
@@ -97,12 +93,12 @@ public class ChalkMarkBlock extends Block {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState blockState) {
+    public ItemStack getCloneItemStack(LevelReader pLevel, BlockPos pPos, BlockState pState) {
         return new ItemStack(Chalk.Items.getChalk(this.color));
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         if (player.isCreative())
             return new ItemStack(Chalk.Items.getChalk(color));
 
@@ -149,26 +145,26 @@ public class ChalkMarkBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult rayTraceResult) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hHitResult) {
         ItemStack usedStack = player.getItemInHand(hand);
 
-        if (!blockState.getValue(GLOWING) && usedStack.is(Chalk.Tags.Items.GLOWINGS)) {
-            if (level.setBlock(blockPos, blockState.setValue(GLOWING, true), Block.UPDATE_ALL_IMMEDIATE)) {
+        if (!state.getValue(GLOWING) && usedStack.is(Chalk.Tags.Items.GLOWINGS)) {
+            if (level.setBlock(pos, state.setValue(GLOWING, true), Block.UPDATE_ALL_IMMEDIATE)) {
                 if (!player.isCreative())
                     usedStack.shrink(1);
 
-                level.playSound(null, blockPos, Chalk.SoundEvents.GLOW_APPLIED.get(), SoundSource.BLOCKS, 1f, 1f);
-                level.playSound(null, blockPos, Chalk.SoundEvents.GLOWING.get(), SoundSource.BLOCKS, 0.8f, 1f);
-                ParticleUtils.spawnParticle(level, ParticleTypes.END_ROD, PositionUtils.blockCenterOffsetToFace(blockPos, blockState.getValue(FACING),
+                level.playSound(null, pos, Chalk.SoundEvents.GLOW_APPLIED.get(), SoundSource.BLOCKS, 1f, 1f);
+                level.playSound(null, pos, Chalk.SoundEvents.GLOWING.get(), SoundSource.BLOCKS, 0.8f, 1f);
+                ParticleUtils.spawnParticle(level, ParticleTypes.END_ROD, PositionUtils.blockCenterOffsetToFace(pos, state.getValue(FACING),
                         0.3f), new Vector3f(0f, 0.03f, 0f), 2);
 
-                return InteractionResult.SUCCESS;
+                return ItemInteractionResult.SUCCESS;
             }
             else
-                return InteractionResult.FAIL;
+                return ItemInteractionResult.FAIL;
         }
 
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
@@ -207,7 +203,6 @@ public class ChalkMarkBlock extends Block {
         return true;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
         if (blockState.getValue(GLOWING)) {
@@ -220,7 +215,7 @@ public class ChalkMarkBlock extends Block {
 
     @Override
     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.getValue(GLOWING) ? Config.GLOWING_CHALK_MARK_LIGHT_LEVEL.get() : 0;
+        return state.getValue(GLOWING) ? Config.Common.GLOWING_MARK_LIGHT_LEVEL.get() : 0;
     }
 
     @Override
@@ -248,11 +243,6 @@ public class ChalkMarkBlock extends Block {
         BlockPos surfacePos = pos.relative(facing.getOpposite());
         BlockState surfaceBlockState = level.getBlockState(surfacePos);
         return surfaceBlockState.isFaceSturdy(level, surfacePos, facing);
-    }
-
-    @Override
-    public boolean isPathfindable(BlockState p_196266_1_, BlockGetter blockGetter, BlockPos p_196266_3_, PathComputationType p_196266_4_) {
-        return true;
     }
 
     @Override

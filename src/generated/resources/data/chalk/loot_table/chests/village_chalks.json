@@ -1,0 +1,51 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "chalk:white_chalk",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "chalk:light_gray_chalk",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "chalk:gray_chalk",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "chalk:black_chalk",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "chalk:yellow_chalk",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "chalk:light_blue_chalk",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "chalk:orange_chalk",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 60
+        }
+      ],
+      "rolls": 2.0
+    }
+  ],
+  "random_sequence": "chalk:chests/village_chalks"
+}

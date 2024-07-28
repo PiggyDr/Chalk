@@ -1,3 +1,6 @@
+### Unreleased
+- Improved emissive rendering of glowing marks. 
+
 ### 1.6.4
 - Chalk marks now have proper names with mods like WAILA or WTHIT.
 - Chalks will again generate in Abandoned Mineshafts. They've been missing for a year, and no one noticed.

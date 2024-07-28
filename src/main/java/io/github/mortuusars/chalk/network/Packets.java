@@ -1,50 +1,34 @@
 package io.github.mortuusars.chalk.network;
 
 import io.github.mortuusars.chalk.Chalk;
-import io.github.mortuusars.chalk.network.packet.ClientboundSelectSymbolPacket;
-import io.github.mortuusars.chalk.network.packet.ServerboundDrawMarkPacket;
-import io.github.mortuusars.chalk.network.packet.ServerboundOpenChalkBoxPacket;
+import io.github.mortuusars.chalk.network.packet.SelectSymbolS2CP;
+import io.github.mortuusars.chalk.network.packet.DrawMarkC2SP;
+import io.github.mortuusars.chalk.network.packet.OpenCreativeChalkBoxC2SP;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
+@EventBusSubscriber(modid = Chalk.ID, bus = EventBusSubscriber.Bus.MOD)
 public class Packets {
-    private static final String PROTOCOL_VERSION = "1";
-    private static int id = 0;
+    @SuppressWarnings("unused")
+    @SubscribeEvent
+    private static void onRegisterPackets(RegisterPayloadHandlersEvent event) {
+        PayloadRegistrar registrar = event.registrar("1");
+        registrar.playToServer(DrawMarkC2SP.TYPE, DrawMarkC2SP.STREAM_CODEC, DrawMarkC2SP::handle);
+        registrar.playToServer(OpenCreativeChalkBoxC2SP.TYPE, OpenCreativeChalkBoxC2SP.STREAM_CODEC, OpenCreativeChalkBoxC2SP::handle);
 
-    private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-            Chalk.resource("packets"),
-            () -> PROTOCOL_VERSION,
-            PROTOCOL_VERSION::equals,
-            PROTOCOL_VERSION::equals);
-
-    public static void register() {
-        CHANNEL.messageBuilder(ServerboundDrawMarkPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
-                .encoder(ServerboundDrawMarkPacket::toBuffer)
-                .decoder(ServerboundDrawMarkPacket::fromBuffer)
-                .consumerMainThread(ServerboundDrawMarkPacket::handle)
-                .add();
-
-        CHANNEL.messageBuilder(ServerboundOpenChalkBoxPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
-                .encoder(ServerboundOpenChalkBoxPacket::toBuffer)
-                .decoder(ServerboundOpenChalkBoxPacket::fromBuffer)
-                .consumerMainThread(ServerboundOpenChalkBoxPacket::handle)
-                .add();
-
-        CHANNEL.messageBuilder(ClientboundSelectSymbolPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(ClientboundSelectSymbolPacket::toBuffer)
-                .decoder(ClientboundSelectSymbolPacket::fromBuffer)
-                .consumerMainThread(ClientboundSelectSymbolPacket::handle)
-                .add();
+        registrar.playToClient(SelectSymbolS2CP.TYPE, SelectSymbolS2CP.STREAM_CODEC, SelectSymbolS2CP::handle);
     }
 
-    public static <MSG> void sendToServer(MSG message) {
-        CHANNEL.sendToServer(message);
+    public static void sendToServer(CustomPacketPayload packet, CustomPacketPayload... otherPackets) {
+        PacketDistributor.sendToServer(packet, otherPackets);
     }
 
-    public static <MSG> void sendToClient(MSG message, ServerPlayer player) {
-        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), message);
+    public static void sendToClient(ServerPlayer player, CustomPacketPayload packet, CustomPacketPayload... otherPackets) {
+        PacketDistributor.sendToPlayer(player, packet, otherPackets);
     }
 }

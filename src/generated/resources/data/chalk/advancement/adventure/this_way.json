@@ -1,0 +1,82 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "draw_in_fortress": {
+      "conditions": {
+        "location": {
+          "structures": "minecraft:fortress"
+        },
+        "mark_color": {
+          "colors": []
+        },
+        "surface_color": {
+          "colors": []
+        }
+      },
+      "trigger": "chalk:mark_drawn"
+    },
+    "draw_in_mineshaft": {
+      "conditions": {
+        "location": {
+          "structures": "minecraft:mineshaft"
+        },
+        "mark_color": {
+          "colors": []
+        },
+        "surface_color": {
+          "colors": []
+        }
+      },
+      "trigger": "chalk:mark_drawn"
+    },
+    "draw_in_mineshaft_mesa": {
+      "conditions": {
+        "location": {
+          "structures": "minecraft:mineshaft_mesa"
+        },
+        "mark_color": {
+          "colors": []
+        },
+        "surface_color": {
+          "colors": []
+        }
+      },
+      "trigger": "chalk:mark_drawn"
+    },
+    "draw_in_stronghold": {
+      "conditions": {
+        "location": {
+          "structures": "minecraft:stronghold"
+        },
+        "mark_color": {
+          "colors": []
+        },
+        "surface_color": {
+          "colors": []
+        }
+      },
+      "trigger": "chalk:mark_drawn"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.chalk.this_way.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "chalk:yellow_chalk"
+    },
+    "title": {
+      "translate": "advancement.chalk.this_way.title"
+    }
+  },
+  "requirements": [
+    [
+      "draw_in_mineshaft",
+      "draw_in_mineshaft_mesa",
+      "draw_in_fortress",
+      "draw_in_stronghold"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -6,13 +6,13 @@ import io.github.mortuusars.chalk.core.Mark;
 import io.github.mortuusars.chalk.core.MarkSymbol;
 import io.github.mortuusars.chalk.core.SymbolOrientation;
 import io.github.mortuusars.chalk.core.SymbolUnlocking;
-import io.github.mortuusars.chalk.data.Lang;
 import io.github.mortuusars.chalk.network.Packets;
-import io.github.mortuusars.chalk.network.packet.ClientboundSelectSymbolPacket;
-import io.github.mortuusars.chalk.render.ChalkColors;
+import io.github.mortuusars.chalk.network.packet.SelectSymbolS2CP;
+import io.github.mortuusars.chalk.data.ChalkColors;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -90,10 +90,10 @@ public class MarkDrawingContext {
         if (player instanceof ServerPlayer serverPlayer) {
             List<MarkSymbol> unlockedSymbols = SymbolUnlocking.getUnlockedSymbols(serverPlayer);
 
-            if (unlockedSymbols.size() > 0)
-                Packets.sendToClient(new ClientboundSelectSymbolPacket(unlockedSymbols), serverPlayer);
+            if (!unlockedSymbols.isEmpty())
+                Packets.sendToClient(serverPlayer, new SelectSymbolS2CP(unlockedSymbols));
             else
-                player.displayClientMessage(Lang.MESSAGE_NO_SYMBOLS_UNLOCKED.translate().withStyle(ChatFormatting.RED), true);
+                player.displayClientMessage(Component.translatable("gui.chalk.no_symbols_unlocked").withStyle(ChatFormatting.RED), true);
         }
     }
 

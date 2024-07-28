@@ -1,10 +1,10 @@
 {
-  "type": "chalk:loot_table_addition",
+  "type": "chalk:add_table",
   "conditions": [
     {
-      "condition": "forge:loot_table_id",
+      "condition": "neoforge:loot_table_id",
       "loot_table_id": "minecraft:chests/simple_dungeon"
     }
   ],
-  "lootTable": "chalk:chests/simple_dungeon_chalk_loot"
+  "table": "chalk:chests/simple_dungeon_chalks"
 }

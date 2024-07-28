@@ -35,8 +35,9 @@
   "item.chalk.white_chalk": "White Chalk",
 
   "item.chalk.chalk_box": "Chalk Box",
-  "item.chalk.chalk_box.tooltip.drawing_with": "Drawing with: ",
-  "item.chalk.chalk_box.tooltip.open": "<Right Click to open>",
+  "item.chalk.chalk_box.tooltip.drawing_with": "§7Drawing with: %s",
+  "item.chalk.chalk_box.tooltip.open": "§8[§7Right Click§8] to open",
+
   "container.chalk.chalk_box": "Chalk Box",
 
   "chalk.subtitles.chalk_broken": "Chalk breaks",
@@ -57,16 +58,49 @@
   "gui.chalk.symbol.pickaxe": "Pickaxe",
 
   "gui.chalk.no_symbols_unlocked": "You don't know how to draw any special symbol",
-  "gui.chalk.unlocked_symbol_message": "You learned how to draw a %s with chalk",
 
-  "advancement.chalk.get_skeleton_skull": "Bound By Bone",
-  "advancement.chalk.get_skeleton_skull.description": "Obtain a Skeleton Skull",
-  "advancement.chalk.sleep_three_times_in_one_place": "Home Is Where the Bed Is",
-  "advancement.chalk.sleep_three_times_in_one_place.description": "Sleep in one place three times in a row",
-  "advancement.chalk.black_chalk_on_black_block": "Alone In the Darkness",
-  "advancement.chalk.black_chalk_on_black_block.description": "Draw with the Black Chalk on the black block in the blackness",
-  "advancement.chalk.draw_mark_in_maze": "This Way!",
-  "advancement.chalk.draw_mark_in_maze.description": "Draw with Chalk in a labyrinthine structure",
-  "advancement.chalk.vandalism": "Vandalism",
-  "advancement.chalk.vandalism.description": "Draw with a Chalk in a Village"
+  "chat.chalk.symbol_unlocked": "You learned how to draw a %s with chalk",
+
+  "advancement.chalk.bound_by_bone.title": "Bound By Bone",
+  "advancement.chalk.bound_by_bone.description": "Obtain a Skeleton Skull",
+  "advancement.chalk.home_is_where_the_bed_is.title": "Home Is Where the Bed Is",
+  "advancement.chalk.home_is_where_the_bed_is.description": "Sleep in one place three times in a row",
+  "advancement.chalk.this_way.title": "This Way!",
+  "advancement.chalk.this_way.description": "Draw with Chalk in a labyrinthine structure",
+  "advancement.chalk.vandalism.title": "Vandalism",
+  "advancement.chalk.vandalism.description": "Draw with a Chalk in a Village",
+  "advancement.chalk.alone_in_the_darkness.title": "Alone In The Darkness",
+  "advancement.chalk.alone_in_the_darkness.description": "Draw with the Black Chalk on the black block in the blackness",
+
+  "chalk.configuration.Symbols": "Symbols",
+  "chalk.configuration.ChalkBoxGlowingEnabled": "Chalk Box: Glowing",
+  "chalk.configuration.ChalkDurability": "Chalk Durability",
+  "chalk.configuration.GlowingMarkLightLevel": "Glowing Chalk Mark Light Level",
+  "chalk.configuration.GenerateChalkInLootChests": "Generate Chalk In Loot Chests",
+  "chalk.configuration.ChalkBoxAmountPerGlowingItem": "Chalk Box: Amount Per Glowing Item",
+
+  "chalk.configuration.SymbolOffsets": "Symbol Offsets",
+  "chalk.configuration.ChalkBoxTooltipHowToOpen": "Chalk Box: Open Tooltip",
+
+  "chalk.configuration.CrossEnabled": "Cross",
+  "chalk.configuration.CrossUnlockAdvancement": "Cross Unlock Advancement",
+  "chalk.configuration.CheckEnabled": "Check",
+  "chalk.configuration.CheckUnlockAdvancement": "Check Unlock Advancement",
+  "chalk.configuration.PickaxeEnabled": "Pickaxe",
+  "chalk.configuration.PickaxeUnlockAdvancement": "Pickaxe Unlock Advancement",
+  "chalk.configuration.HouseEnabled": "House",
+  "chalk.configuration.HouseUnlockAdvancement": "House Unlock Advancement",
+  "chalk.configuration.SkullEnabled": "Skull",
+  "chalk.configuration.SkullUnlockAdvancement": "Skull Unlock Advancement",
+  "chalk.configuration.HeartEnabled": "Heart",
+  "chalk.configuration.HeartUnlockAdvancement": "Heart Unlock Advancement",
+
+  "chalk.configuration.CenterRotationOffset": "Center Rotation Offset",
+  "chalk.configuration.CrossRotationOffset": "Cross Rotation Offset",
+  "chalk.configuration.HeartRotationOffset": "Heart Rotation Offset",
+  "chalk.configuration.SkullRotationOffset": "Skull Rotation Offset",
+  "chalk.configuration.HouseRotationOffset": "House Rotation Offset",
+  "chalk.configuration.CheckRotationOffset": "Check Rotation Offset",
+  "chalk.configuration.PickaxeRotationOffset": "Pickaxe Rotation Offset",
+  "chalk.configuration.ArrowRotationOffset": "Arrow Rotation Offset"
 }

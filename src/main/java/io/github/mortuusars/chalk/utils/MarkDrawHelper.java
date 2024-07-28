@@ -3,7 +3,7 @@ package io.github.mortuusars.chalk.utils;
 import io.github.mortuusars.chalk.Chalk;
 import io.github.mortuusars.chalk.block.ChalkMarkBlock;
 import io.github.mortuusars.chalk.core.DummyDrawingTool;
-import io.github.mortuusars.chalk.core.IDrawingTool;
+import io.github.mortuusars.chalk.core.IChalkDrawingTool;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -24,7 +24,7 @@ import java.util.Random;
 public class MarkDrawHelper {
     public static boolean draw(Player player, Level level, BlockPos markPos, BlockState markBlockState, int markColor, InteractionHand drawingHand) {
         ItemStack drawingItemstack = player.getItemInHand(drawingHand);
-        IDrawingTool drawingTool = drawingItemstack.getItem() instanceof IDrawingTool tool ? tool : new DummyDrawingTool();
+        IChalkDrawingTool drawingTool = drawingItemstack.getItem() instanceof IChalkDrawingTool tool ? tool : new DummyDrawingTool();
 
         boolean isMarkDrawn = level.setBlock(markPos, markBlockState, Block.UPDATE_ALL_IMMEDIATE);
 
@@ -34,7 +34,7 @@ public class MarkDrawHelper {
                     BlockPos surfacePos = markPos.relative(markBlockState.getValue(ChalkMarkBlock.FACING).getOpposite());
                     BlockState surfaceState = player.level().getBlockState(surfacePos);
                     MapColor surfaceMaterialColor = surfaceState.getMapColor(player.level(), surfacePos);
-                    Chalk.CriteriaTriggers.CHALK_DRAW_COLORS.trigger(serverPlayer, surfaceMaterialColor, color);
+                    Chalk.CriteriaTriggers.MARK_DRAWN.get().trigger(serverPlayer, surfaceMaterialColor, color);
                 });
 
                 float R = (markColor & 0x00FF0000) >> 16;

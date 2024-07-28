@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Optional;
 
-public class DummyDrawingTool implements IDrawingTool {
+public class DummyDrawingTool implements IChalkDrawingTool {
     @Override
     public Mark getMark(ItemStack itemInHand, MarkDrawingContext drawingContext, MarkSymbol symbol) {
         return null;
@@ -27,7 +27,7 @@ public class DummyDrawingTool implements IDrawingTool {
     }
 
     @Override
-    public boolean getGlowing(ItemStack stack) {
+    public boolean isGlowing(ItemStack stack) {
         return false;
     }
 

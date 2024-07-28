@@ -1,6 +1,6 @@
 package io.github.mortuusars.chalk.utils;
 
-import io.github.mortuusars.chalk.render.ChalkColors;
+import io.github.mortuusars.chalk.data.ChalkColors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
