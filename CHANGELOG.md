@@ -1,3 +1,7 @@
+## 1.6.6 - 2024-07-28
+- Fixed crash caused by loading client-only class on the server.
+- Fixed Chalk Box contents tooltip not displaying. 
+
 ## 1.6.5 - 2024-07-28
 - Update to 1.21. 
 - Chalk Box contents are now showing in the tooltip.

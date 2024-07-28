@@ -54,7 +54,7 @@ public class ChalkBoxItem extends Item implements IChalkDrawingTool {
 
     @Override
     public @NotNull Optional<TooltipComponent> getTooltipImage(@NotNull ItemStack stack) {
-        return Config.Client.CHALK_BOX_TOOLTIP_CONTENTS.get() && getContents(stack).isEmpty()
+        return Config.Client.CHALK_BOX_TOOLTIP_CONTENTS.get() && !getContents(stack).isEmpty()
                 ? Optional.of(getContents(stack)) : Optional.empty();
     }
 

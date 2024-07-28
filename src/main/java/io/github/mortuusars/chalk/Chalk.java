@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import io.github.mortuusars.chalk.advancement.MarkDrawnTrigger;
 import io.github.mortuusars.chalk.advancement.ConsecutiveSleepingTrigger;
 import io.github.mortuusars.chalk.block.ChalkMarkBlock;
+import io.github.mortuusars.chalk.client.Client;
 import io.github.mortuusars.chalk.item.ChalkBoxItem;
 import io.github.mortuusars.chalk.item.ChalkItem;
 import io.github.mortuusars.chalk.item.component.ChalkBoxContents;
@@ -27,10 +28,12 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
@@ -53,8 +56,6 @@ public class Chalk {
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.Common.SPEC);
         modContainer.registerConfig(ModConfig.Type.CLIENT, Config.Client.SPEC);
 
-        modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-
         Blocks.BLOCKS.register(modEventBus);
         Items.ITEMS.register(modEventBus);
         Menus.MENUS.register(modEventBus);
@@ -62,6 +63,10 @@ public class Chalk {
         LootModifiers.LOOT_MODIFIERS.register(modEventBus);
         SoundEvents.SOUND_EVENTS.register(modEventBus);
         CriteriaTriggers.CRITERIA_TRIGGERS.register(modEventBus);
+
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            Client.registerConfigScreen(modContainer);
+        }
     }
 
     public static ResourceLocation resource(String path) {
