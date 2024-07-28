@@ -1,7 +1,7 @@
 package io.github.mortuusars.chalk.client.gui.tooltip;
 
 import io.github.mortuusars.chalk.Chalk;
-import io.github.mortuusars.chalk.config.Config;
+import io.github.mortuusars.chalk.Config;
 import io.github.mortuusars.chalk.item.ChalkBoxItem;
 import io.github.mortuusars.chalk.item.component.ChalkBoxContents;
 import net.minecraft.client.gui.Font;
@@ -71,7 +71,7 @@ public class ClientChalkBoxTooltip implements ClientTooltipComponent {
         if (showGlowingStuff) {
             guiGraphics.blit(TEXTURE, x, y + 38, 0, 41, backgroundWidth(), 30, 128, 128);
 
-            renderSlot(x + 29, y + 46, index, guiGraphics, font);
+            renderSlot(x + 29, y + 47, index, guiGraphics, font);
 
             if (contents.glowAmount() > 0) {
                 int maxWidth = 72;

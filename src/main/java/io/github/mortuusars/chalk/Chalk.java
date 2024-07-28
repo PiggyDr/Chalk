@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import io.github.mortuusars.chalk.advancement.MarkDrawnTrigger;
 import io.github.mortuusars.chalk.advancement.ConsecutiveSleepingTrigger;
 import io.github.mortuusars.chalk.block.ChalkMarkBlock;
-import io.github.mortuusars.chalk.config.Config;
 import io.github.mortuusars.chalk.item.ChalkBoxItem;
 import io.github.mortuusars.chalk.item.ChalkItem;
 import io.github.mortuusars.chalk.item.component.ChalkBoxContents;

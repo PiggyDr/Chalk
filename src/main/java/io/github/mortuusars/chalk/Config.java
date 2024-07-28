@@ -1,4 +1,4 @@
-package io.github.mortuusars.chalk.config;
+package io.github.mortuusars.chalk;
 
 import com.mojang.datafixers.util.Pair;
 import io.github.mortuusars.chalk.core.MarkSymbol;
@@ -67,15 +67,20 @@ public class Config {
 
     public static class Client {
         public static final ModConfigSpec SPEC;
-        public static final ModConfigSpec.BooleanValue CHALK_BOX_SHOW_OPEN_TOOLTIP;
+        public static final ModConfigSpec.BooleanValue CHALK_BOX_TOOLTIP_CONTENTS;
+        public static final ModConfigSpec.BooleanValue CHALK_BOX_TOOLTIP_DETAILS;
         public static final Map<MarkSymbol, ModConfigSpec.IntValue> SYMBOL_ROTATION_OFFSETS;
 
         static {
             ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 
-            CHALK_BOX_SHOW_OPEN_TOOLTIP = builder
-                    .comment("Information about how to open a Chalk Box will be shown in the item's tooltip.")
-                    .define("ChalkBoxTooltipHowToOpen", true);
+            CHALK_BOX_TOOLTIP_CONTENTS = builder
+                    .comment("Contents of the Chalk Box will be shown in item's tooltip.")
+                    .define("ChalkBoxTooltipContents", true);
+
+            CHALK_BOX_TOOLTIP_DETAILS = builder
+                    .comment("Information about using Chalk Box will be shown in the item's tooltip.")
+                    .define("ChalkBoxTooltipDetails", true);
 
             builder.comment("Rotation offsets (in degrees) for each mark.").push("SymbolOffsets");
 

@@ -1,9 +1,8 @@
 package io.github.mortuusars.chalk.menus;
 
 import com.google.common.base.Preconditions;
-import com.mojang.datafixers.util.Pair;
 import io.github.mortuusars.chalk.Chalk;
-import io.github.mortuusars.chalk.config.Config;
+import io.github.mortuusars.chalk.Config;
 import io.github.mortuusars.chalk.item.ChalkBoxItem;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.sounds.SoundSource;
@@ -18,8 +17,6 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 public class ChalkBoxMenu extends AbstractContainerMenu {
-    public Pair<Integer, Integer> chalkBoxCoords = Pair.of(Integer.MIN_VALUE, Integer.MIN_VALUE);
-
     private final int chalkBoxSlotIndex;
     private final ChalkBoxItem chalkBoxItem;
     private final Player player;
@@ -87,7 +84,6 @@ public class ChalkBoxMenu extends AbstractContainerMenu {
                 int index = (column + row * 9) + 9;
 
                 if (index == chalkBoxSlotIndex) {
-                    chalkBoxCoords = Pair.of(column * 18 + 8, 98 + row * 18);
                     addSlot(new Slot(playerInventory, index, column * 18 + 8, 98 + row * 18) {
                         @Override
                         public boolean mayPlace(@NotNull ItemStack pStack) {
@@ -119,7 +115,6 @@ public class ChalkBoxMenu extends AbstractContainerMenu {
         //Hotbar
         for (int index = 0; index < 9; index++) {
             if (index == chalkBoxSlotIndex) {
-                chalkBoxCoords = Pair.of(index * 18 + 8, 156);
                 addSlot(new Slot(playerInventory, index, index * 18 + 8, 156) {
                     @Override
                     public boolean mayPlace(@NotNull ItemStack pStack) {

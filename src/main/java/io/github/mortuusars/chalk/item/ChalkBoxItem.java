@@ -3,7 +3,7 @@ package io.github.mortuusars.chalk.item;
 import com.google.common.base.Preconditions;
 import io.github.mortuusars.chalk.Chalk;
 import io.github.mortuusars.chalk.block.ChalkMarkBlock;
-import io.github.mortuusars.chalk.config.Config;
+import io.github.mortuusars.chalk.Config;
 import io.github.mortuusars.chalk.core.IChalkDrawingTool;
 import io.github.mortuusars.chalk.core.Mark;
 import io.github.mortuusars.chalk.core.MarkSymbol;
@@ -14,6 +14,7 @@ import io.github.mortuusars.chalk.network.packet.OpenCreativeChalkBoxC2SP;
 import io.github.mortuusars.chalk.data.ChalkColors;
 import io.github.mortuusars.chalk.utils.MarkDrawingContext;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -52,20 +53,31 @@ public class ChalkBoxItem extends Item implements IChalkDrawingTool {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context,
-                                @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
-        if (Config.Client.CHALK_BOX_SHOW_OPEN_TOOLTIP.get() &&
-                Minecraft.getInstance().player != null && Minecraft.getInstance().screen instanceof AbstractContainerScreen<?> screen) {
-            Slot slotUnderMouse = screen.getSlotUnderMouse();
-            if (slotUnderMouse != null && slotUnderMouse.container instanceof Inventory) {
-                tooltipComponents.add(Component.translatable("item.chalk.chalk_box.tooltip.open"));
-            }
-        }
+    public @NotNull Optional<TooltipComponent> getTooltipImage(@NotNull ItemStack stack) {
+        return Config.Client.CHALK_BOX_TOOLTIP_CONTENTS.get() && getContents(stack).isEmpty()
+                ? Optional.of(getContents(stack)) : Optional.empty();
     }
 
     @Override
-    public @NotNull Optional<TooltipComponent> getTooltipImage(@NotNull ItemStack stack) {
-        return Optional.of(getContents(stack));
+    public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context,
+                                @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+        if (!Config.Client.CHALK_BOX_TOOLTIP_DETAILS.get()) {
+            return;
+        }
+
+        if (!Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable("gui.chalk.tooltip.hold_for_details"));
+        } else {
+            if (Minecraft.getInstance().player != null
+                    && Minecraft.getInstance().screen instanceof AbstractContainerScreen<?> screen
+                    && screen.getSlotUnderMouse() != null
+                    && screen.getSlotUnderMouse().container instanceof Inventory) {
+                tooltipComponents.add(Component.translatable("item.chalk.chalk_box.tooltip.open"));
+            }
+
+            tooltipComponents.add(Component.translatable("item.chalk.chalk_box.tooltip.insert"));
+            tooltipComponents.add(Component.translatable("item.chalk.chalk_box.tooltip.change_selected"));
+        }
     }
 
     @Override
@@ -92,9 +104,40 @@ public class ChalkBoxItem extends Item implements IChalkDrawingTool {
                     player.playSound(Chalk.SoundEvents.CHALK_BOX_CHANGE.get(),
                             0.9f, 0.9f + player.level().random.nextFloat() * 0.2f);
                     otherStack.setCount(0);
-                    return true; // Handled
+                    return true;
                 }
             }
+        }
+        else if (Config.Common.CHALK_BOX_GLOWING_ENABLED.get()
+                && otherStack.is(Chalk.Tags.Items.GLOWINGS)) {
+            ItemStack existingItem = getItemInSlot(stack, GLOWINGS_SLOT_INDEX);
+            int glowAmountBefore = getGlowAmount(stack);
+
+            if (existingItem.isEmpty()) {
+                setItemInSlot(stack, GLOWINGS_SLOT_INDEX, otherStack.copy());
+                otherStack.setCount(0);
+            } else if (existingItem.getCount() >= existingItem.getMaxStackSize() || !ItemStack.isSameItemSameComponents(existingItem, otherStack)) {
+                return true;
+            } else {
+                int insertedAmount = Math.min(otherStack.getCount(), existingItem.getMaxStackSize() - existingItem.getCount());
+                if (insertedAmount <= 0) {
+                    return true;
+                }
+
+                existingItem.setCount(existingItem.getCount() + insertedAmount);
+                otherStack.split(insertedAmount);
+                setItemInSlot(stack, GLOWINGS_SLOT_INDEX, existingItem);
+            }
+
+            player.playSound(Chalk.SoundEvents.CHALK_BOX_CHANGE.get(),
+                    0.9f, 0.9f + player.level().random.nextFloat() * 0.2f);
+
+            if (glowAmountBefore < getGlowAmount(stack)) {
+                player.playSound(Chalk.SoundEvents.GLOW_APPLIED.get(), 1f, 1f);
+                player.playSound(Chalk.SoundEvents.GLOWING.get(), 1f, 1f);
+            }
+
+            return true;
         }
 
         return false;
@@ -357,11 +400,11 @@ public class ChalkBoxItem extends Item implements IChalkDrawingTool {
 
     @Override
     public boolean isGlowing(ItemStack chalkBoxStack) {
-        return getContents(chalkBoxStack).glowAmount() > 0;
+        return Config.Common.CHALK_BOX_GLOWING_ENABLED.get() && getContents(chalkBoxStack).glowAmount() > 0;
     }
 
     public int getGlowAmount(ItemStack chalkBoxStack) {
-        return getContents(chalkBoxStack).glowAmount();
+        return Config.Common.CHALK_BOX_GLOWING_ENABLED.get() ? getContents(chalkBoxStack).glowAmount() : 0;
     }
 
     public void consumeGlow(ItemStack chalkBoxStack) {

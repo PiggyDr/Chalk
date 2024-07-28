@@ -3,7 +3,7 @@ package io.github.mortuusars.chalk.loot;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.mortuusars.chalk.Chalk;
-import io.github.mortuusars.chalk.config.Config;
+import io.github.mortuusars.chalk.Config;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

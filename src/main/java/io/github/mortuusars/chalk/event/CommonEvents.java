@@ -2,7 +2,7 @@ package io.github.mortuusars.chalk.event;
 
 import io.github.mortuusars.chalk.Chalk;
 import io.github.mortuusars.chalk.advancement.PlayerSleepInfo;
-import io.github.mortuusars.chalk.config.Config;
+import io.github.mortuusars.chalk.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;

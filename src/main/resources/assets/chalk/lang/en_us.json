@@ -34,9 +34,12 @@
   "item.chalk.orange_chalk": "Orange Chalk",
   "item.chalk.white_chalk": "White Chalk",
 
+  "gui.chalk.tooltip.hold_for_details": "§8Hold [§7Shift§8] for Details",
+
   "item.chalk.chalk_box": "Chalk Box",
-  "item.chalk.chalk_box.tooltip.drawing_with": "§7Drawing with: %s",
-  "item.chalk.chalk_box.tooltip.open": "§8[§7Right Click§8] to open",
+  "item.chalk.chalk_box.tooltip.open": "§8[§7Right Click§8] or §8[§7Use§8] in air to open",
+  "item.chalk.chalk_box.tooltip.insert": "§8[§7Right Click§8] with item to insert",
+  "item.chalk.chalk_box.tooltip.change_selected": "§8[§7Sneak + Use§8] in air to change selected §7Chalk",
 
   "container.chalk.chalk_box": "Chalk Box",
 
@@ -80,7 +83,8 @@
   "chalk.configuration.ChalkBoxAmountPerGlowingItem": "Chalk Box: Amount Per Glowing Item",
 
   "chalk.configuration.SymbolOffsets": "Symbol Offsets",
-  "chalk.configuration.ChalkBoxTooltipHowToOpen": "Chalk Box: Open Tooltip",
+  "chalk.configuration.ChalkBoxTooltipContents": "Chalk Box: Contents in Tooltip",
+  "chalk.configuration.ChalkBoxTooltipDetails": "Chalk Box: Details in Tooltip",
 
   "chalk.configuration.CrossEnabled": "Cross",
   "chalk.configuration.CrossUnlockAdvancement": "Cross Unlock Advancement",

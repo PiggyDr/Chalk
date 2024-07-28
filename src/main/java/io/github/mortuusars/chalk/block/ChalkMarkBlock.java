@@ -2,7 +2,7 @@ package io.github.mortuusars.chalk.block;
 
 import com.google.common.collect.ImmutableMap;
 import io.github.mortuusars.chalk.Chalk;
-import io.github.mortuusars.chalk.config.Config;
+import io.github.mortuusars.chalk.Config;
 import io.github.mortuusars.chalk.core.MarkSymbol;
 import io.github.mortuusars.chalk.core.SymbolOrientation;
 import io.github.mortuusars.chalk.data.ChalkColors;

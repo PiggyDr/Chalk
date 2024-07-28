@@ -1,4 +1,5 @@
 ### Unreleased
+- Chalk Box contents are now showing in the tooltip.
 - Improved emissive rendering of glowing marks. 
 
 ### 1.6.4

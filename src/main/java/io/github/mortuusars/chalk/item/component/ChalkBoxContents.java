@@ -71,6 +71,10 @@ public record ChalkBoxContents(List<ItemStack> items, int glowAmount) implements
                 '}';
     }
 
+    public boolean isEmpty() {
+        return items.stream().allMatch(ItemStack::isEmpty) && glowAmount() <= 0;
+    }
+
     public static class Mutable {
         private List<ItemStack> items;
         private int glowingUses;
