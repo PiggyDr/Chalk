@@ -165,7 +165,7 @@
         },
         {
           "type": "minecraft:empty",
-          "weight": 70
+          "weight": 60
         }
       ],
       "rolls": 2.0
