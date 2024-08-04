@@ -1,3 +1,6 @@
+## 1.6.7 - 2024-08-04
+- Fixed crash when shift-clicking another Chalk Box item into a Chalk Box. 
+
 ## 1.6.6 - 2024-07-28
 - Fixed crash caused by loading client-only class on the server.
 - Fixed Chalk Box contents tooltip not displaying. 

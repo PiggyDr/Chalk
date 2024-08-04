@@ -1,4 +1,4 @@
-package io.github.mortuusars.chalk.menus;
+package io.github.mortuusars.chalk.menu;
 
 import com.google.common.base.Preconditions;
 import io.github.mortuusars.chalk.item.ChalkBoxItem;

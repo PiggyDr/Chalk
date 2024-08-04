@@ -8,7 +8,7 @@ import io.github.mortuusars.chalk.core.IChalkDrawingTool;
 import io.github.mortuusars.chalk.core.Mark;
 import io.github.mortuusars.chalk.core.MarkSymbol;
 import io.github.mortuusars.chalk.item.component.ChalkBoxContents;
-import io.github.mortuusars.chalk.menus.ChalkBoxMenu;
+import io.github.mortuusars.chalk.menu.ChalkBoxMenu;
 import io.github.mortuusars.chalk.network.Packets;
 import io.github.mortuusars.chalk.network.packet.OpenCreativeChalkBoxC2SP;
 import io.github.mortuusars.chalk.data.ChalkColors;
@@ -97,7 +97,7 @@ public class ChalkBoxItem extends Item implements IChalkDrawingTool {
         }
 
         // Insert chalk into box:
-        if (otherStack.getItem() instanceof IChalkDrawingTool) {
+        if (otherStack.getItem() instanceof ChalkItem) {
             for (int i = 0; i < CHALK_SLOTS; i++) {
                 if (getItemInSlot(stack, i).isEmpty()) {
                     setItemInSlot(stack, i, otherStack.copy());
@@ -303,9 +303,9 @@ public class ChalkBoxItem extends Item implements IChalkDrawingTool {
         Preconditions.checkElementIndex(slot, SLOTS, "Slot " + slot + " is invalid. Chalk Box has " + SLOTS + " slots.");
         if (!stack.isEmpty()) {
             Preconditions.checkArgument(stack.getItem() instanceof ChalkItem || slot == GLOWINGS_SLOT_INDEX,
-                    "Only ChalkItem can be inserted into slots 0-{}.", CHALK_SLOTS - 1);
+                    "%s cannot be inserted into slot '%s'. Only ChalkItem can be inserted into slots 0-%s.", stack, slot, CHALK_SLOTS - 1);
             Preconditions.checkArgument(stack.is(Chalk.Tags.Items.GLOWINGS) || slot != GLOWINGS_SLOT_INDEX,
-                    "Only #chalk:glowings can be inserted into slot {}", GLOWINGS_SLOT_INDEX);
+                    "%s cannot be inserted into slot '%s'. Only #chalk:glowings can be inserted into slot {}", stack, slot, GLOWINGS_SLOT_INDEX);
         }
 
         ChalkBoxContents contents = chalkBoxStack.has(Chalk.DataComponents.CHALK_BOX_CONTENTS)
@@ -394,7 +394,7 @@ public class ChalkBoxItem extends Item implements IChalkDrawingTool {
         } else if (slot == GLOWINGS_SLOT_INDEX) {
             return stack.is(Chalk.Tags.Items.GLOWINGS);
         } else {
-            return stack.getItem() instanceof IChalkDrawingTool;
+            return stack.getItem() instanceof ChalkItem;
         }
     }
 

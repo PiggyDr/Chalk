@@ -1,11 +1,10 @@
 package io.github.mortuusars.chalk.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.mortuusars.chalk.Chalk;
 import io.github.mortuusars.chalk.Config;
 import io.github.mortuusars.chalk.item.ChalkBoxItem;
-import io.github.mortuusars.chalk.menus.ChalkBoxMenu;
+import io.github.mortuusars.chalk.menu.ChalkBoxMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
