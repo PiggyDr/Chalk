@@ -1,3 +1,8 @@
+# Changelog
+
+## 1.6.8 - 2024-09-15
+- Disabled log messages for wrong model data, which are causing log spam with JourneyMap installed.   
+
 ## 1.6.7 - 2024-08-04
 - Fixed crash when trying to insert another Chalk Box item into a Chalk Box. 
 

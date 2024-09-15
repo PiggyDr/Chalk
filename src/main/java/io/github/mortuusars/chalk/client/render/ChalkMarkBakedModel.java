@@ -88,22 +88,23 @@ public class ChalkMarkBakedModel implements BakedModel {
             return Collections.emptyList();
 
         if (!data.has(FACING)){
-            Chalk.LOGGER.error("IModelData did not have expected property: FACING");
+            // JourneyMap is not using correct data for some reason. And it causes a log spam.
+            // Chalk.LOGGER.error("IModelData did not have expected property: FACING");
             return baseModel.getQuads(state, side, rand, data, renderType);
         }
 
         if (!data.has(SYMBOL)){
-            Chalk.LOGGER.error("IModelData did not have expected property: SYMBOL");
+            // Chalk.LOGGER.error("IModelData did not have expected property: SYMBOL");
             return baseModel.getQuads(state, side, rand, data, renderType);
         }
 
         if (!data.has(ORIENTATION)){
-            Chalk.LOGGER.error("IModelData did not have expected property: ORIENTATION");
+            // Chalk.LOGGER.error("IModelData did not have expected property: ORIENTATION");
             return baseModel.getQuads(state, side, rand, data, renderType);
         }
 
         if (!data.has(GLOWING)){
-            Chalk.LOGGER.error("IModelData did not have expected property: GLOWING");
+            // Chalk.LOGGER.error("IModelData did not have expected property: GLOWING");
             return baseModel.getQuads(state, side, rand, data, renderType);
         }
 
