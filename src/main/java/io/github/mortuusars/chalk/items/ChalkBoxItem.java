@@ -256,17 +256,15 @@ public class ChalkBoxItem extends Item implements IDrawingTool {
         if (player.isCreative())
             return;
 
-
-
         ItemStack chalkBox = player.getItemInHand(hand);
 
         Preconditions.checkArgument(chalkBox.getItem() instanceof ChalkBoxItem, "ChalkBox expected in player's hand.");
 
         int selectedChalkIndex = getSelectedChalkIndex(chalkBox);
         ItemStack selectedChalk = ChalkBox.getItemInSlot(chalkBox, selectedChalkIndex);
-        ItemStack resultChalk = ChalkItem.damageAndDestroy(selectedChalk, player);
+        selectedChalk.hurtAndBreak(1, player, pl -> pl.broadcastBreakEvent(hand));
 
-        ChalkBox.setSlot(chalkBox, selectedChalkIndex, resultChalk);
+        ChalkBox.setSlot(chalkBox, selectedChalkIndex, selectedChalk);
 
         if (markBlockState.getValue(ChalkMarkBlock.GLOWING))
             ChalkBox.consumeGlow(chalkBox);

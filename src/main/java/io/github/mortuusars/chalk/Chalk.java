@@ -144,8 +144,6 @@ public class Chalk
     public static class SoundEvents {
         private static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Chalk.ID);
 
-        public static final RegistryObject<SoundEvent> CHALK_BROKEN = SOUND_EVENTS.register("item.chalk_broken",
-                () -> SoundEvent.createVariableRangeEvent(Chalk.resource("item.chalk_broken")));
         public static final RegistryObject<SoundEvent> CHALK_BOX_CHANGE = SOUND_EVENTS.register("item.chalk_box_change",
                 () -> SoundEvent.createVariableRangeEvent(Chalk.resource("item.chalk_box_change")));
         public static final RegistryObject<SoundEvent> CHALK_BOX_OPEN = SOUND_EVENTS.register("item.chalk_box_open",

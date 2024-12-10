@@ -70,9 +70,10 @@ public class ChalkItem extends Item implements IDrawingTool {
         if (player.isCreative())
             return;
 
-        ItemStack result = damageAndDestroy(player.getItemInHand(hand), player);
-        if (result.isEmpty())
-            player.setItemInHand(hand, ItemStack.EMPTY);
+        ItemStack stack = player.getItemInHand(hand);
+        stack.hurtAndBreak(1, player, pl -> {
+            pl.broadcastBreakEvent(hand);
+        });
     }
 
     @Override
@@ -95,21 +96,6 @@ public class ChalkItem extends Item implements IDrawingTool {
         return false;
     }
 
-    public static ItemStack damageAndDestroy(ItemStack chalkStack, Player player) {
-        if (!chalkStack.isDamageableItem())
-            return chalkStack;
-
-        chalkStack.setDamageValue(chalkStack.getDamageValue() + 1);
-        if (chalkStack.getDamageValue() >= chalkStack.getMaxDamage()) {
-            Vec3 playerPos = player.position();
-            player.level().playSound(player, playerPos.x, playerPos.y, playerPos.z, Chalk.SoundEvents.CHALK_BROKEN.get(),
-                    SoundSource.PLAYERS, 0.9f, 0.9f + player.level().random.nextFloat() * 0.2f);
-            return ItemStack.EMPTY;
-        }
-
-        return chalkStack;
-    }
-
     @Override
     public int getMaxDamage(ItemStack stack) {
         return Config.CHALK_DURABILITY.get();
@@ -119,10 +105,6 @@ public class ChalkItem extends Item implements IDrawingTool {
     }
     @Override
     public boolean isRepairable(@NotNull ItemStack stack) {
-        return false;
-    }
-    @Override
-    public boolean isEnchantable(@NotNull ItemStack stack) {
         return false;
     }
     @Override

@@ -1,3 +1,9 @@
+### 1.6.5
+- Chalks can now be enchanted in creative mode with a command.
+- Chalks are now using default item stack damage logic and play default sound when broken
+  - Removed `item.chalk.broken` sound event.
+- Added ko-KR localization.
+
 ### 1.6.4
 - Chalk marks now have proper names with mods like WAILA or WTHIT.
 - Chalks will again generate in Abandoned Mineshafts. They've been missing for a year, and no one noticed.

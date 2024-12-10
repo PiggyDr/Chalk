@@ -1,13 +1,4 @@
 {
-  "item.chalk_broken": {
-    "subtitle": "chalk.subtitles.chalk_broken",
-    "sounds": [
-      "dig/gravel1",
-      "dig/gravel2",
-      "dig/gravel3",
-      "dig/gravel4"
-    ]
-  },
   "item.chalk_draw": {
     "subtitle": "chalk.subtitles.mark_drawn",
     "sounds": [
