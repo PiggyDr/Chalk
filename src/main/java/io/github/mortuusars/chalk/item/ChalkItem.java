@@ -11,11 +11,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -66,9 +68,8 @@ public class ChalkItem extends Item implements IChalkDrawingTool {
         if (player.isCreative())
             return;
 
-        ItemStack result = damageAndDestroy(player.getItemInHand(hand), player);
-        if (result.isEmpty())
-            player.setItemInHand(hand, ItemStack.EMPTY);
+        ItemStack stack = player.getItemInHand(hand);
+        stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
     }
 
     @Override
@@ -91,21 +92,6 @@ public class ChalkItem extends Item implements IChalkDrawingTool {
         return false;
     }
 
-    public static ItemStack damageAndDestroy(ItemStack chalkStack, Player player) {
-        if (!chalkStack.isDamageableItem())
-            return chalkStack;
-
-        chalkStack.setDamageValue(chalkStack.getDamageValue() + 1);
-        if (chalkStack.getDamageValue() >= chalkStack.getMaxDamage()) {
-            Vec3 playerPos = player.position();
-            player.level().playSound(player, playerPos.x, playerPos.y, playerPos.z, Chalk.SoundEvents.CHALK_BROKEN.get(),
-                    SoundSource.PLAYERS, 0.9f, 0.9f + player.level().random.nextFloat() * 0.2f);
-            return ItemStack.EMPTY;
-        }
-
-        return chalkStack;
-    }
-
     @Override
     public int getMaxDamage(@NotNull ItemStack stack) {
         try {
@@ -120,10 +106,6 @@ public class ChalkItem extends Item implements IChalkDrawingTool {
     }
     @Override
     public boolean isRepairable(@NotNull ItemStack stack) {
-        return false;
-    }
-    @Override
-    public boolean isEnchantable(@NotNull ItemStack stack) {
         return false;
     }
     @Override

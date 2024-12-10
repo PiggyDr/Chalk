@@ -23,6 +23,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -269,9 +270,10 @@ public class ChalkBoxItem extends Item implements IChalkDrawingTool {
         Preconditions.checkState(selectedChalkIndex >= 0, "Chalk Box has no selected drawing tool. {}", chalkBoxStack);
 
         ItemStack selectedChalk = getItemInSlot(chalkBoxStack, selectedChalkIndex);
-        ItemStack resultChalk = ChalkItem.damageAndDestroy(selectedChalk, player);
 
-        setItemInSlot(chalkBoxStack, selectedChalkIndex, resultChalk);
+        selectedChalk.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+
+        setItemInSlot(chalkBoxStack, selectedChalkIndex, selectedChalk.isEmpty() ? ItemStack.EMPTY : selectedChalk);
 
         if (markBlockState.getValue(ChalkMarkBlock.GLOWING))
             consumeGlow(chalkBoxStack);

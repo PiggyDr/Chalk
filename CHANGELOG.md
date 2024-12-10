@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.9 - 2024-12-10
+- Chalks can now be enchanted if added to enchantment tags.
+- Chalks are now using default item stack damage logic and play default sound when broken
+  - Removed `item.chalk.broken` sound event.
+
 ## 1.6.8 - 2024-09-15
 - Disabled log messages for wrong model data, which are causing log spam with JourneyMap installed.   
 
